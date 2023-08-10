@@ -1,24 +1,19 @@
-const username = process.env.MONGO_USERNAME
-const password = process.env.MONGO_PASSWORD
-
 const mongoose = require('mongoose');
+require('dotenv').config({ path: __dirname + '/../.env' });
 
+const mongoURL = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@clusteryuvi.duf0crf.mongodb.net/?retryWrites=true&w=majority`
 const connectDB = async () => {
   try {
-    // await mongoose.connect("mongodb://yuvrajsagar117:learnmongoDB@ac-qjiv1u5-shard-00-00.duf0crf.mongodb.net:27017,ac-qjiv1u5-shard-00-01.duf0crf.mongodb.net:27017,ac-qjiv1u5-shard-00-02.duf0crf.mongodb.net:27017/?ssl=true&replicaSet=atlas-lookq6-shard-0&authSource=admin&retryWrites=true&w=majority",
-
-    // await mongoose.connect(`mongodb+srv://yuvrajsagar117:learnmongoDB@clusteryuvi.duf0crf.mongodb.net/?retryWrites=true&w=majority`,
-    await mongoose.connect("mongodb://yuvrajsagar117:learnmongoDB@ac-qjiv1u5-shard-00-00.duf0crf.mongodb.net:27017,ac-qjiv1u5-shard-00-01.duf0crf.mongodb.net:27017,ac-qjiv1u5-shard-00-02.duf0crf.mongodb.net:27017/?ssl=true&replicaSet=atlas-lookq6-shard-0&authSource=admin&retryWrites=true&w=majority",
-
+    await mongoose.connect(mongoURL,
       {
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
       }
     );
-
     console.log('MongoDB is Connected...');
   } catch (err) {
     console.error(err.message);
+    console.log('Can\'t connect');
     process.exit(1);
   }
 };
