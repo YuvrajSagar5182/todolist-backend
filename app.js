@@ -3,7 +3,6 @@ const express = require('express');
 const cors = require('cors');
 
 const connetDB = require('./config/db')
-
 const todoRoutes = require('./routes/todos');
 const connectDB = require('./config/db');
 const app = express();
